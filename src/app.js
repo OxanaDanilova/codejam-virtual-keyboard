@@ -3,8 +3,12 @@ console.log('Hello, SASS');
 let color = 'orange';
 
 const clickBtn = (event) => {
- /*  console.log(event); */
-
+  const clickedBtn = event.target.closest('.button');
+  //const row = clickBtn.parentElement;
+  let sign = clickedBtn.textContent;
+  let text = document.getElementsByTagName('textarea')[0].value;
+  text+=sign;
+  document.getElementsByTagName('textarea')[0].value = text;
 }
 
 const mouseDown = (event)=> {
