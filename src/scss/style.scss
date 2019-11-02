@@ -1,0 +1,40 @@
+$body-color: blue;
+$button-color:orange;
+$func-button-color: gray;
+
+body {
+  color: $body-color;
+  width: 800px;
+  margin:0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+}
+
+.button {
+  width: 65px;
+  height: 50px;
+  background-color: $button-color;
+  color:rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.func {
+  background-color: $func-button-color;
+  color: black;
+  width: 80px;
+}
+
+.space {
+  width: 400px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
