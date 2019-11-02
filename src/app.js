@@ -2,27 +2,48 @@ import './scss/style.scss';
 console.log('Hello, SASS');
 let color = 'orange';
 
+const keydown = (event)=> {
+  let sign = event.key;
+  document.getElementsByTagName('textarea')[0].value+=sign;
+  for (let i=0; i<=document.getElementsByClassName('button').length; i++) {
+    let element = document.getElementsByClassName('button')[i];
+    if (element.textContent === event.key) {
+      let ev = new Event("mousedown");
+      element.dispatchEvent(ev);
+    }
+  }
+}
+
+  const keyup = (event)=> {
+     for (let i=0; i<=document.getElementsByClassName('button').length; i++) {
+      let element = document.getElementsByClassName('button')[i];
+      if (element.textContent === event.key) {
+        let ev = new Event("mouseup");
+        element.dispatchEvent(ev);
+      }
+    }
+ }
+
+document.addEventListener('keydown', keydown);
+document.addEventListener('keyup', keyup);
+
 const clickBtn = (event) => {
   const clickedBtn = event.target.closest('.button');
   //const row = clickBtn.parentElement;
   let sign = clickedBtn.textContent;
-  let text = document.getElementsByTagName('textarea')[0].value;
-  text+=sign;
-  document.getElementsByTagName('textarea')[0].value = text;
-}
+  document.getElementsByTagName('textarea')[0].value+=sign;
+  }
 
 const mouseDown = (event)=> {
   const clickedBtn = event.target.closest('.button');
   color = window.getComputedStyle(clickedBtn).getPropertyValue("background-color");
   clickedBtn.style.backgroundColor= '#ff6500';
-  console.log('mouseDown');
-}
+  }
 
 const mouseUp = (event)=> {
   const clickedBtn = event.target.closest('.button');
   clickedBtn.style.backgroundColor= color;
-  console.log('mouseUp');
-}
+ }
 
 const drawfirstr = () => {
 const firstarrbut = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace' ];
