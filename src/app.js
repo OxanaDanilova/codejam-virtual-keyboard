@@ -61,28 +61,53 @@ const changeLang = ()=> {
   }
 }
 
+const handleFuncButton = (code)=> {
+  switch (code) {
+    case 'Backspace':
+     console.log('Backspace');
+     document.getElementsByTagName('textarea')[0].value = document.getElementsByTagName('textarea')[0].value.slice(0, document.getElementsByTagName('textarea')[0].value.length-1);
+     break;
+     case 'CapsLock':
+        document.getElementsByClassName('button')[29].classList.toggle('clicked');
+        changeCapsLock();
+        break;
+    case 'Tab':
+        document.getElementsByTagName('textarea')[0].value+='\t';
+        console.log('Tab');
+     break;
+   case 'Delete':
+      console.log('Delete');
+     break;
+     case 'Enter':
+        document.getElementsByTagName('textarea')[0].value+='\n';
+        console.log('Enter');
+      break;
+   case 'ShiftLeft'||'ShiftRight'||'ControlLeft'||'MetaLeft'||'AltLeft'||'AltRight'||'ControlRight':
+      break;
+  }
+
+}
+
 const keydown = (event)=> {
-  let code = event.code;
-  let index = evCodeArr.indexOf(code);
-  let sign = event.key;
+  let index = evCodeArr.indexOf(event.code);
+  //let sign = event.key;
   if (event.shiftKey && event.altKey) {
     changeLang();
   } else {
-    if (sign === 'CapsLock') {
-      const clickedBtn = document.getElementsByClassName('button')[29];
-      clickedBtn.classList.toggle('clicked');
-      changeCapsLock();
-    } else {
-      let element = document.getElementsByClassName('button')[index];
-      document.getElementsByTagName('textarea')[0].value+=element.textContent;
-      console.log(element.textContent);
-      let ev = new Event("mousedown");
-      element.dispatchEvent(ev);
-      ev.stopPropagation();
+       if (event.code === 'CapsLock' || event.code === 'Backspace' || event.code ==='Tab' || event.code ==='Delete'|| event.code ==='Enter'|| event.code ==='ShiftLeft'|| event.code ==='ShiftRight'|| event.code ==='ControlLeft'|| event.code ==='MetaLeft'|| event.code ==='AltLeft'|| event.code ==='AltRight'|| event.code ==='ControlRight') {
+        handleFuncButton(event.code);
+      } else {
+        if (index) {
+          let element = document.getElementsByClassName('button')[index];
+          document.getElementsByTagName('textarea')[0].value+=element.textContent;
+          console.log(element.textContent);
+          let ev = new Event("mousedown");
+          element.dispatchEvent(ev);
+          ev.stopPropagation();
+        }
+
     }
-
   }
-
 }
 
   const keyup = (event)=> {
@@ -101,9 +126,8 @@ document.addEventListener('keyup', keyup);
 const clickBtn = (event ) => {
   const clickedBtn = event.target.closest('.button');
   let sign = clickedBtn.textContent;
-  if (sign === 'CapsLock') {
-    clickedBtn.classList.toggle("clicked");
-    changeCapsLock();
+  if (sign === 'CapsLock' || sign === 'Backspace' || sign ==='Tab' || sign ==='Del'|| sign ==='Enter'|| sign ==='Shift'|| sign ==='Ctrl'|| sign ==='Win'|| sign ==='Alt') {
+    handleFuncButton(sign);
   } else {
   document.getElementsByTagName('textarea')[0].value+=sign;
   }
