@@ -10,10 +10,17 @@ body {
   flex-direction: column;
 }
 
+.text-panel {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
 .keyboard {
   display: flex;
   flex-direction: column;
   width: 800px;
+
 }
 
 .button {
