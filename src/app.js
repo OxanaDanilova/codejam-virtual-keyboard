@@ -1,11 +1,14 @@
 import './scss/style.scss';
 let color = 'orange';
-let mode /* = 'eng' */;
+let mode;
 if (localStorage.getItem('mode')){
   mode = localStorage.getItem('mode');
 } else {
   mode = 'eng';
 }
+
+
+
 let evCodeArr = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus','Equal','Backspace','Tab','KeyQ','KeyW','KeyE','KeyR','KeyT','KeyY','KeyU','KeyI','KeyO','KeyP','BracketLeft','BracketRight','Backslash','Delete','CapsLock','KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote','Enter','ShiftLeft','KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash','ShiftRight','ControlLeft','MetaLeft','AltLeft','Space','AltRight','ControlRight'];
 
 const changeKeyboard = (arr)=> {
@@ -150,7 +153,6 @@ const clickBtn = (event ) => {
   const clickedBtn = event.target.closest('.button');
   let sign = clickedBtn.textContent;
   if (sign === 'CapsLock' || sign === 'Backspace' || sign ==='Tab' || sign ==='Del'|| sign ==='Enter'|| sign ==='Shift'|| sign ==='Ctrl'|| sign ==='Win'|| sign ==='Alt') {
-    console.log('attention');
     handleFuncButton(sign);
   } else {
   document.getElementsByTagName('textarea')[0].value+=sign;
@@ -316,6 +318,10 @@ function startDraw() {
   drawforthr();
   drawfifthr();
   setKeyboard();
+
+if (localStorage.getItem('mode') && (localStorage.getItem('mode')==='ruCaps' || localStorage.getItem('mode')==='engCaps')){
+  document.getElementsByClassName('button')[29].className = 'clicked';
+  }
 }
 
 startDraw();
