@@ -3,9 +3,7 @@
         "browser": true,
         "es6": true
     },
-    "extends": [
-        "airbnb-base"
-    ],
+    "extends": ["airbnb-base", "plugin:css-modules/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -14,6 +12,9 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
+    "plugins": [
+      "css-modules"
+    ],
     "rules": {
     }
 }
