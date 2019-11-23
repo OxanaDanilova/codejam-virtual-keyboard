@@ -4,10 +4,9 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --watch --mode=development",
-    "build": "webpack",
-    "dev": "webpack --mode=development"
+    "dev": "webpack-dev-server --mode development --watch",
+    "build": "webpack --mode production",
+    "lint": "eslint src/"
   },
   "repository": {
     "type": "git",

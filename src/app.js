@@ -1,15 +1,18 @@
 import './scss/style.scss';
 
 let color = 'orange';
-let mode;
-if (localStorage.getItem('mode')) {
-  mode = localStorage.getItem('mode');
+let modeKeyboard;
+if (localStorage.getItem('modeKeyboard')) {
+  modeKeyboard = localStorage.getItem('modeKeyboard');
 } else {
-  mode = 'eng';
+  modeKeyboard = 'eng';
 }
 
 
 const evCodeArr = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete', 'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter', 'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight', 'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight'];
+const pressedKeyArr = evCodeArr.slice(0);
+pressedKeyArr.fill(false);
+
 
 const changeKeyboard = (arr) => {
   for (let i = 0; i < document.getElementsByClassName('button').length; i += 1) {
@@ -23,25 +26,25 @@ const changeCapsLock = () => {
   const engCaps = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
   const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
   const ruCaps = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
-  switch (mode) {
+  switch (modeKeyboard) {
     case 'eng':
-      mode = 'engCaps';
-      localStorage.setItem('mode', 'engCaps');
+      modeKeyboard = 'engCaps';
+      localStorage.setItem('modeKeyboard', 'engCaps');
       changeKeyboard(engCaps);
       break;
     case 'engCaps':
-      mode = 'eng';
-      localStorage.setItem('mode', 'eng');
+      modeKeyboard = 'eng';
+      localStorage.setItem('modeKeyboard', 'eng');
       changeKeyboard(eng);
       break;
     case 'ruCaps':
-      mode = 'ru';
-      localStorage.setItem('mode', 'ru');
+      modeKeyboard = 'ru';
+      localStorage.setItem('modeKeyboard', 'ru');
       changeKeyboard(ru);
       break;
     case 'ru':
-      mode = 'ruCaps';
-      localStorage.setItem('mode', 'ruCaps');
+      modeKeyboard = 'ruCaps';
+      localStorage.setItem('modeKeyboard', 'ruCaps');
       changeKeyboard(ruCaps);
       break;
     default:
@@ -54,25 +57,25 @@ const changeLang = () => {
   const engCaps = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
   const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
   const ruCaps = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
-  switch (mode) {
+  switch (modeKeyboard) {
     case 'eng':
-      mode = 'ru';
-      localStorage.setItem('mode', 'ru');
+      modeKeyboard = 'ru';
+      localStorage.setItem('modeKeyboard', 'ru');
       changeKeyboard(ru);
       break;
     case 'engCaps':
-      mode = 'ruCaps';
-      localStorage.setItem('mode', 'ruCaps');
+      modeKeyboard = 'ruCaps';
+      localStorage.setItem('modeKeyboard', 'ruCaps');
       changeKeyboard(ruCaps);
       break;
     case 'ruCaps':
-      mode = 'engCaps';
-      localStorage.setItem('mode', 'engCaps');
+      modeKeyboard = 'engCaps';
+      localStorage.setItem('modeKeyboard', 'engCaps');
       changeKeyboard(engCaps);
       break;
     case 'ru':
-      mode = 'eng';
-      localStorage.setItem('mode', 'eng');
+      modeKeyboard = 'eng';
+      localStorage.setItem('modeKeyboard', 'eng');
       changeKeyboard(eng);
       break;
     default:
@@ -123,23 +126,27 @@ const keydown = (event) => {
     changeLang();
   } else if (event.code === 'CapsLock' || event.code === 'Backspace' || event.code === 'Tab' || event.code === 'Delete' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'MetaLeft' || event.code === 'AltLeft' || event.code === 'AltRight' || event.code === 'ControlRight') {
     const element = document.getElementsByClassName('button')[index];
-    newEvent(element);
+    if (pressedKeyArr[index] === false) {
+      pressedKeyArr[index] = true;
+      newEvent(element);
+    }
     handleFuncButton(event.code);
   } else if (index >= 0) {
     const element = document.getElementsByClassName('button')[index];
     document.getElementsByTagName('textarea')[0].value += element.textContent;
-    newEvent(element);
+    if (pressedKeyArr[index] === false) {
+      pressedKeyArr[index] = true;
+      newEvent(element);
+    }
   }
 };
 
 const keyup = (event) => {
-  for (let i = 0; i < document.getElementsByClassName('button').length; i += 1) {
-    const element = document.getElementsByClassName('button')[i];
-    if (element.textContent === event.key) {
-      const ev = new Event('mouseup');
-      element.dispatchEvent(ev);
-    }
-  }
+  const index = evCodeArr.indexOf(event.code);
+  pressedKeyArr[index] = false;
+  const element = document.getElementsByClassName('button')[index];
+  const ev = new Event('mouseup');
+  element.dispatchEvent(ev);
 };
 
 document.addEventListener('keydown', keydown);
@@ -257,7 +264,7 @@ const setKeyboard = () => {
   const engCaps = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
   const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
   const ruCaps = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
-  switch (mode) {
+  switch (modeKeyboard) {
     case 'eng':
       changeKeyboard(eng);
       break;
@@ -306,7 +313,7 @@ function startDraw() {
   drawfifthr();
   setKeyboard();
 
-  if (localStorage.getItem('mode') && (localStorage.getItem('mode') === 'ruCaps' || localStorage.getItem('mode') === 'engCaps')) {
+  if (localStorage.getItem('modeKeyboard') && (localStorage.getItem('modeKeyboard') === 'ruCaps' || localStorage.getItem('modeKeyboard') === 'engCaps')) {
     document.getElementsByClassName('button')[29].className = 'button func clicked';
   }
 }
