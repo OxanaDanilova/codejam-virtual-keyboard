@@ -1,0 +1,321 @@
+import './scss/style.scss';
+
+let color = 'orange';
+let modeKeyboard;
+if (localStorage.getItem('modeKeyboard')) {
+  modeKeyboard = localStorage.getItem('modeKeyboard');
+} else {
+  modeKeyboard = 'eng';
+}
+
+
+const evCodeArr = ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace', 'Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete', 'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter', 'ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight', 'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight'];
+const pressedKeyArr = evCodeArr.slice(0);
+pressedKeyArr.fill(false);
+
+
+const changeKeyboard = (arr) => {
+  for (let i = 0; i < document.getElementsByClassName('button').length; i += 1) {
+    const element = document.getElementsByClassName('button')[i];
+    element.textContent = arr[i];
+  }
+};
+
+const changeCapsLock = () => {
+  const eng = ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace', 'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del', 'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter', 'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '.', ',', '/', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const engCaps = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const ruCaps = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  switch (modeKeyboard) {
+    case 'eng':
+      modeKeyboard = 'engCaps';
+      localStorage.setItem('modeKeyboard', 'engCaps');
+      changeKeyboard(engCaps);
+      break;
+    case 'engCaps':
+      modeKeyboard = 'eng';
+      localStorage.setItem('modeKeyboard', 'eng');
+      changeKeyboard(eng);
+      break;
+    case 'ruCaps':
+      modeKeyboard = 'ru';
+      localStorage.setItem('modeKeyboard', 'ru');
+      changeKeyboard(ru);
+      break;
+    case 'ru':
+      modeKeyboard = 'ruCaps';
+      localStorage.setItem('modeKeyboard', 'ruCaps');
+      changeKeyboard(ruCaps);
+      break;
+    default:
+      break;
+  }
+};
+
+const changeLang = () => {
+  const eng = ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace', 'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del', 'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter', 'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '.', ',', '/', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const engCaps = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const ruCaps = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  switch (modeKeyboard) {
+    case 'eng':
+      modeKeyboard = 'ru';
+      localStorage.setItem('modeKeyboard', 'ru');
+      changeKeyboard(ru);
+      break;
+    case 'engCaps':
+      modeKeyboard = 'ruCaps';
+      localStorage.setItem('modeKeyboard', 'ruCaps');
+      changeKeyboard(ruCaps);
+      break;
+    case 'ruCaps':
+      modeKeyboard = 'engCaps';
+      localStorage.setItem('modeKeyboard', 'engCaps');
+      changeKeyboard(engCaps);
+      break;
+    case 'ru':
+      modeKeyboard = 'eng';
+      localStorage.setItem('modeKeyboard', 'eng');
+      changeKeyboard(eng);
+      break;
+    default:
+      break;
+  }
+};
+
+const handleFuncButton = (code) => {
+  const textarea = document.getElementsByTagName('textarea')[0];
+  switch (code) {
+    case 'Backspace':
+      textarea.value = textarea.value.slice(0, textarea.value.length - 1);
+      break;
+    case 'CapsLock':
+      document.getElementsByClassName('button')[29].classList.toggle('clicked');
+      changeCapsLock();
+      break;
+    case 'Tab':
+      textarea.value += '\t';
+      break;
+    case 'Delete':
+      textarea.value = textarea.value.slice(0, textarea.selectionStart)
+        .concat(textarea.value.slice(textarea.selectionEnd, textarea.value.length));
+      break;
+    case 'Del':
+      textarea.value = textarea.value.slice(0, textarea.selectionStart)
+        .concat(textarea.value.slice(textarea.selectionEnd, textarea.value.length));
+      break;
+    case 'Enter':
+      textarea.value += '\n';
+      break;
+    case 'ShiftLeft' || 'ShiftRight' || 'ControlLeft' || 'MetaLeft' || 'AltLeft' || 'AltRight' || 'ControlRight':
+      break;
+    default:
+      break;
+  }
+};
+
+const newEvent = (element) => {
+  const ev = new Event('mousedown');
+  element.dispatchEvent(ev);
+  ev.stopPropagation();
+};
+
+const keydown = (event) => {
+  const index = evCodeArr.indexOf(event.code);
+  if (event.shiftKey && event.altKey) {
+    changeLang();
+  } else if (event.code === 'CapsLock' || event.code === 'Backspace' || event.code === 'Tab' || event.code === 'Delete' || event.code === 'Enter' || event.code === 'ShiftLeft' || event.code === 'ShiftRight' || event.code === 'ControlLeft' || event.code === 'MetaLeft' || event.code === 'AltLeft' || event.code === 'AltRight' || event.code === 'ControlRight') {
+    const element = document.getElementsByClassName('button')[index];
+    if (pressedKeyArr[index] === false) {
+      pressedKeyArr[index] = true;
+      newEvent(element);
+    }
+    handleFuncButton(event.code);
+  } else if (index >= 0) {
+    const element = document.getElementsByClassName('button')[index];
+    document.getElementsByTagName('textarea')[0].value += element.textContent;
+    if (pressedKeyArr[index] === false) {
+      pressedKeyArr[index] = true;
+      newEvent(element);
+    }
+  }
+};
+
+const keyup = (event) => {
+  const index = evCodeArr.indexOf(event.code);
+  pressedKeyArr[index] = false;
+  const element = document.getElementsByClassName('button')[index];
+  const ev = new Event('mouseup');
+  element.dispatchEvent(ev);
+};
+
+document.addEventListener('keydown', keydown);
+document.addEventListener('keyup', keyup);
+
+const clickBtn = (event) => {
+  document.getElementsByTagName('textarea')[0].focus = true;
+  const clickedBtn = event.target.closest('.button');
+  const sign = clickedBtn.textContent;
+  if (sign === 'CapsLock' || sign === 'Backspace' || sign === 'Tab' || sign === 'Del' || sign === 'Enter' || sign === 'Shift' || sign === 'Ctrl' || sign === 'Win' || sign === 'Alt') {
+    handleFuncButton(sign);
+  } else {
+    document.getElementsByTagName('textarea')[0].value += sign;
+  }
+};
+
+const mouseDown = (event) => {
+  const clickedBtn = event.target.closest('.button');
+  color = window.getComputedStyle(clickedBtn).getPropertyValue('background-color');
+  if (clickedBtn.textContent !== 'CapsLock') {
+    clickedBtn.style.backgroundColor = '#ff6500';
+  }
+};
+
+const mouseUp = (event) => {
+  const clickedBtn = event.target.closest('.button');
+  if (clickedBtn.textContent !== 'CapsLock') {
+    clickedBtn.style.backgroundColor = color;
+  }
+};
+
+
+const drawfirstr = () => {
+  const firstarrbut = ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'];
+  const firstrow = document.getElementsByClassName('first row')[0];
+  for (let i = 0; i < firstarrbut.length; i += 1) {
+    const btn = document.createElement('button');
+    if (i === firstarrbut.length - 1) { btn.className = 'button func'; } else {
+      btn.className = 'button';
+    }
+    btn.textContent = firstarrbut[i];
+    btn.addEventListener('mousedown', mouseDown);
+    btn.addEventListener('mouseup', mouseUp);
+    btn.addEventListener('click', clickBtn);
+    firstrow.appendChild(btn);
+  }
+};
+
+const drawsecondr = () => {
+  const secondarrbut = ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'];
+  const secondrow = document.getElementsByClassName('second row')[0];
+  for (let i = 0; i < secondarrbut.length; i += 1) {
+    const btn = document.createElement('button');
+    if (i === 0 || i === secondarrbut.length - 1) { btn.className = 'button func'; } else {
+      btn.className = 'button';
+    }
+    btn.textContent = secondarrbut[i];
+    btn.addEventListener('mousedown', mouseDown);
+    btn.addEventListener('mouseup', mouseUp);
+    btn.addEventListener('click', clickBtn);
+    secondrow.appendChild(btn);
+  }
+};
+
+const drawthirdr = () => {
+  const thirdarrbut = ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'];
+  const thirdrow = document.getElementsByClassName('third row')[0];
+  for (let i = 0; i < thirdarrbut.length; i += 1) {
+    const btn = document.createElement('button');
+    if (i === 0 || i === thirdarrbut.length - 1) { btn.className = 'button func'; } else {
+      btn.className = 'button';
+    }
+    btn.textContent = thirdarrbut[i];
+    btn.addEventListener('mousedown', mouseDown);
+    btn.addEventListener('mouseup', mouseUp);
+    btn.addEventListener('click', clickBtn);
+    thirdrow.appendChild(btn);
+  }
+};
+
+const drawforthr = () => {
+  const fortharrbut = ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '.', ',', '/', 'Shift'];
+  const forthrow = document.getElementsByClassName('forth row')[0];
+  for (let i = 0; i < fortharrbut.length; i += 1) {
+    const btn = document.createElement('button');
+    if (i === 0 || i === fortharrbut.length - 1) { btn.className = 'button func'; } else {
+      btn.className = 'button';
+    }
+    btn.textContent = fortharrbut[i];
+    btn.addEventListener('mousedown', mouseDown);
+    btn.addEventListener('mouseup', mouseUp);
+    btn.addEventListener('click', clickBtn);
+    forthrow.appendChild(btn);
+  }
+};
+
+const drawfifthr = () => {
+  const fiftharrbut = ['Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const fifthrow = document.getElementsByClassName('fifth row')[0];
+  for (let i = 0; i < fiftharrbut.length; i += 1) {
+    const btn = document.createElement('button');
+    if (i === 3) { btn.className = 'button space'; } else {
+      btn.className = 'button func';
+    }
+    btn.textContent = fiftharrbut[i];
+    btn.addEventListener('mousedown', mouseDown);
+    btn.addEventListener('mouseup', mouseUp);
+    btn.addEventListener('click', clickBtn);
+    fifthrow.appendChild(btn);
+  }
+};
+
+const setKeyboard = () => {
+  const eng = ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace', 'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del', 'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter', 'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '.', ',', '/', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const engCaps = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del', 'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter', 'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const ru = ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del', 'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter', 'Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  const ruCaps = ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace', 'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del', 'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter', 'Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl'];
+  switch (modeKeyboard) {
+    case 'eng':
+      changeKeyboard(eng);
+      break;
+    case 'engCaps':
+      changeKeyboard(engCaps);
+      break;
+    case 'ruCaps':
+      changeKeyboard(ruCaps);
+      break;
+    case 'ru':
+      changeKeyboard(ru);
+      break;
+    default:
+      break;
+  }
+};
+
+function startDraw() {
+  const textpanel = document.createElement('section');
+  textpanel.className = 'text-panel';
+  document.body.appendChild(textpanel);
+
+  const textarea = document.createElement('textarea');
+  textarea.setAttribute('name', 'text');
+  textarea.setAttribute('cols', '110');
+  textarea.setAttribute('rows', '15');
+  textarea.setAttribute('readonly', '');
+  textarea.setAttribute('autofocus', '');
+  textpanel.appendChild(textarea);
+
+
+  const keyboard = document.createElement('section');
+  keyboard.className = 'keyboard';
+  document.body.appendChild(keyboard);
+
+  const firstrowarr = ['first', 'second', 'third', 'forth', 'fifth'];
+  for (let i = 1; i <= 5; i += 1) {
+    const row = document.createElement('div');
+    row.classList = `row ${firstrowarr[i - 1]}`;
+    keyboard.appendChild(row);
+  }
+  drawfirstr();
+  drawsecondr();
+  drawthirdr();
+  drawforthr();
+  drawfifthr();
+  setKeyboard();
+
+  if (localStorage.getItem('modeKeyboard') && (localStorage.getItem('modeKeyboard') === 'ruCaps' || localStorage.getItem('modeKeyboard') === 'engCaps')) {
+    document.getElementsByClassName('button')[29].className = 'button func clicked';
+  }
+}
+
+startDraw();
